@@ -135,23 +135,21 @@ func int_to_rome(x int) (string, error) {
 func main() {
 	lst, err := input()
 	if err != nil {
-		fmt.Println(err)
-	} else {
-		lst_parsed, flag_is_rome, err := parse(lst)
+		panic(err)
+	}
+	lst_parsed, flag_is_rome, err := parse(lst)
+	if err != nil {
+		panic(err)
+	}
+	res := calcul(lst_parsed)
+	if flag_is_rome {
+		ans, err := int_to_rome(res)
 		if err != nil {
-			fmt.Println(err)
+			panic(err)
 		} else {
-			res := calcul(lst_parsed)
-			if flag_is_rome {
-				ans, err := int_to_rome(res)
-				if err != nil {
-					fmt.Println(err)
-				} else {
-					fmt.Println(ans)
-				}
-			} else {
-				fmt.Println(res)
-			}
+			fmt.Println(ans)
 		}
+	} else {
+		fmt.Println(res)
 	}
 }
